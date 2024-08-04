@@ -3,6 +3,7 @@ from contextlib import redirect_stdout
 import io
 from config.logger_config import logger
 
+
 def log_function(func):
     """
     Decorator that logs the call and return value of the decorated function.
@@ -14,6 +15,7 @@ def log_function(func):
     Returns:
         Callable: The wrapped function with logging.
     """
+
     @wraps(func)
     def wrapper(*args, **kwargs):
 
@@ -38,5 +40,5 @@ def log_function(func):
                 logger.info(f"Print output from '{func.__name__}':\n{output}")
             logger.exception(f"Function '{func.__name__}' raised an exception: {e}")
             raise
-    return wrapper
 
+    return wrapper

@@ -22,27 +22,26 @@ class User(AsyncAttrs, Base):
     qr_code = Column(String, nullable=True)
     links = relationship("Link", back_populates="user")
 
+    password_auth = relationship('PasswordAuth', uselist=False, back_populates='user')
+    sso_auth = relationship('SSOAuth', uselist=False, back_populates='user')
 
 
-#     password_auth = relationship('PasswordAuth', uselist=False, back_populates='user')
-#     sso_auth = relationship('SSOAuth', uselist=False, back_populates='user')
-#
-#
-# class PasswordAuth(Base):
-#     __tablename__ = 'password_auth'
-#     id = Column(Integer, primary_key=True, autoincrement=True)
-#     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-#     password_hash = Column(String(128), nullable=False)
-#     user = relationship('User', back_populates='password_auth')
-#
-#
-# class SSOAuth(Base):
-#     __tablename__ = 'sso_auth'
-#     id = Column(Integer, primary_key=True, autoincrement=True)
-#     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-#     provider = Column(String(50), nullable=False)
-#     provider_user_id = Column(String(100), nullable=False, unique=True)
-#     user = relationship('User', back_populates='sso_auth')
+class PasswordAuth(Base):
+    __tablename__ = 'password_auth'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    password_hash = Column(String(128), nullable=False)
+    user = relationship('User', back_populates='password_auth')
+
+
+class SSOAuth(Base):
+    __tablename__ = 'sso_auth'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    provider = Column(String(50), nullable=False)
+    provider_user_id = Column(String(100), nullable=False, unique=True)
+    user = relationship('User', back_populates='sso_auth')
+
 
 class Link(AsyncAttrs, Base):
     __tablename__ = "links"
