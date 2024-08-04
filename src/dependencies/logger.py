@@ -12,3 +12,4 @@ def log_function(func):
         logger.info(f"Function '{func.__name__}' returned {result}")
         return result
     return wrapper
+
