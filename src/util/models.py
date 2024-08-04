@@ -19,7 +19,9 @@ class User(AsyncAttrs, Base):
     bio = Column(String, nullable=True)
     role = Column(String, default="user")
     registered_at = Column(DateTime, default=datetime.utcnow)
+    qr_code = Column(String, nullable=True)
     links = relationship("Link", back_populates="user")
+
 
 
 #     password_auth = relationship('PasswordAuth', uselist=False, back_populates='user')
