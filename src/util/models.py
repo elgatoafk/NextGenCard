@@ -1,9 +1,10 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.asyncio import AsyncAttrs
+from src.config.settings import settings
 from src.util.base import Base
 from datetime import datetime
-import uuid
+from nanoid import generate
 
 
 class User(AsyncAttrs, Base):
@@ -11,10 +12,11 @@ class User(AsyncAttrs, Base):
 
     id = Column(Integer, primary_key=True)
     email = Column(String, unique=True)
-    personal_id = Column(String, unique=True, default=lambda: str(uuid.uuid4()), index=True)
+    personal_id = Column(String(100), unique=True, default=lambda: str(generate(size=settings.NANOID_STRING_SIZE)),
+                         index=True)
+    profile_picture = Column(String, nullable=True)
     full_name = Column(String, nullable=True)
     bio = Column(String, nullable=True)
-    hashed_password = Column(String)
     role = Column(String, default="user")
     registered_at = Column(DateTime, default=datetime.utcnow)
     links = relationship("Link", back_populates="user")

@@ -13,6 +13,8 @@ class Settings(BaseSettings):
     DESCRIPTION: str = "API for NextGenCard"
     VERSION: str = "0.1"
 
+    NANOID_STRING_SIZE: int = 6
+
     # SECRET_KEY: str = os.getenv("SECRET_KEY", "your_secret_key")
     # ALGORITHM: str = "HS256"
     # ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
