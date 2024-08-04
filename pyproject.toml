@@ -10,6 +10,7 @@ python = "^3.11"
 python-dotenv = "^1.0.1"
 pydantic-settings = "^2.4.0"
 sqlalchemy = "^2.0.31"
+asyncpg = "^0.29.0"
 
 
 [build-system]
